@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kirjalista</title>
+    <link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
+</head>
+<body>
+    <div class="container mt-5">
+        <h1>Kirjat</h1>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Otsikko</th>
+                    <th>Kirjailija</th>
+                    <th>Vuosi</th>
+                    <th>ISBN</th>
+                    <th>Hinta</th>
+                    <th>Toiminnot</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="book : ${books}">
+                    <td th:text="${book.title}"></td>
+                    <td th:text="${book.author}"></td>
+                    <td th:text="${book.year}"></td>
+                    <td th:text="${book.isbn}"></td>
+                    <td th:text="${book.price}"></td>
+                    <td>
+                        <a th:href="@{/edit/{id}(id=${book.id})}" class="btn btn-info btn-sm">Muokkaa</a>
+                        <a th:href="@{/delete/{id}(id=${book.id})}" onclick="return confirm('Haluatko varmasti poistaa tämän kirjan?')" class="btn btn-danger btn-sm">Poista</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <!-- Lisää kirja -linkki -->
+        <div>
+            <a href="/addbook" class="btn btn-success">Lisää Kirja</a>
+        </div>
+    </div>
+</body>
+</html>
